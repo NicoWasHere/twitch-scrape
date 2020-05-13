@@ -8,7 +8,7 @@ import sys
 valid_chars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9']
 
 if len(sys.argv)>1 and sys.argv[1] == "-h" or sys.argv[1] == "-help":
-    print("Run this file in the command line to iterate all possible letter combinations.\nYou can specify a starting point for the file to interate from.\nusasge. python3 twitch_name_combinations.py [starting word (optional)]")
+    print("Run this file in the command line to iterate all possible letter combinations.\nYou can specify a starting point for the file to interate from or the number of characters in each combonation.\nusasge. python3 twitch_name_combinations.py [starting word (optional)] [number (optional)]")
     exit()
 
 driver = webdriver.Chrome('./drivers/chromedriver') 
@@ -80,6 +80,10 @@ def setCode(name):
     global nameCode
     nameCode = []
     for letter in name:
+        if(not letter.isalnum()):
+            print("ERROR INVALID CHARACTERS ENTERED")
+            driver.close()
+            exit()
         nameCode.append(int(str(ord(letter.lower())-97)))
 
 #opens twitch
@@ -90,7 +94,13 @@ driver.find_element_by_tag_name('nav').find_elements_by_tag_name('button')[5].cl
 time.sleep(3)
 form = driver.find_element_by_tag_name('form')
 if len(sys.argv)>1:
-    setCode(sys.argv[1])
+    if sys.argv[1].isnumeric():
+        nameCode = []
+        for x in range(int(sys.argv[1])):
+            nameCode.append(0)
+    else:
+        setCode(sys.argv[1])
+
 f = open("results.txt","a")
 combinations()
 driver.quit()

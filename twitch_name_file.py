@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException  
 import time
 import sys
+from webdriver_manager.chrome import ChromeDriverManager
 
 #checks provided file before hand
 if len(sys.argv)>1:
@@ -18,7 +19,8 @@ else:
     print("FILE NOT FOUND")
     exit()
 
-driver = webdriver.Chrome('./drivers/chromedriver') 
+#installs a new driver. Can be replaced with the chrome drivers location
+driver = webdriver.Chrome(ChromeDriverManager().install())
 
 #returns true if a there is an element with the tag_name in the given element
 def check_exists_by_tag_name(element, tag_name):

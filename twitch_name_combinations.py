@@ -103,7 +103,7 @@ if len(sys.argv)>1:
     else:
         setCode(sys.argv[1])
 
-f = open("results.txt","a")
+f = open(sys.argv[0].split("twitch_name")[0]+"results.txt","a")
 combinations()
 driver.quit()
 f.close()

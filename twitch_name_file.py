@@ -70,10 +70,10 @@ time.sleep(3)
 driver.find_element_by_tag_name('nav').find_elements_by_tag_name('button')[5].click()
 time.sleep(3)
 form = driver.find_element_by_tag_name('form')
-f = open("results.txt","a")
 
 if len(sys.argv)>1:
     try:
+         f = open(sys.argv[1].split(".")[0]+"_RESULTS.txt","a")
          useFile(sys.argv[1])
     except:
         print("FILE NOT FOUND")

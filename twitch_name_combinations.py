@@ -58,7 +58,7 @@ def validateName(name):
     while(not check_exists_by_tag_name(form,'figure')):
         pass
     #checks if name is valid
-    if(check_exists_by_class_name(form,"tw-svg__asset--success")):
+    if(check_exists_by_class_name(form,"cdUIZB")):
         return True
     return False
 

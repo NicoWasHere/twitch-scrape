@@ -1,7 +1,7 @@
 # twitch-scrape
 A set of python scripts made to help scrape twitch for available usernames. 
 
-I made this project because I wanted a cool sounding username on twitch that was a normal word. The project uses selenium to validate twitch usernames. It can either test combinations of letters or names from a file. I used it to find my new username [smonkees](https://www.twitch.tv/smonkees).
+I made this project because I wanted a cool sounding username on twitch that was a normal word. The project uses selenium to validate twitch usernames. It can either test combinations of letters or names from a file. 
 
 In the project I have a couple of files that should be run through command line.
 

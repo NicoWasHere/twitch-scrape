@@ -50,7 +50,7 @@ def checkNotFin():
         if code !=34:
             return True
     return False
-
+ 
 #checks if the name is valid. Returns true if valid
 def validateName(name): 
     form.find_element_by_id("signup-username").send_keys(name)

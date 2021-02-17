@@ -14,4 +14,7 @@ twitch_name_file.py [file path]
 parse_file [input file] [output file (optional)] [length (optional)]
 *parse file allows the user to go through a list of words and filter out all words that aren't a specific length/made up of valid twitch username characters. If the length is not specified, the script will default to 4 characters long.*
 
+twitch_ban_checker.py [file path]
+*the ban checker takes in a list of usernames and outputs banned.txt and not_banned.txt files that list the accounts that are banned and not banned respectively. The original list must only consist of existing twitch accounts.*
+
 Contact me with any questions at nicolaesanderberg@gmail.com

@@ -8,28 +8,24 @@ from webdriver_manager.chrome import ChromeDriverManager
 #all of the characters allowed in a twitch username
 valid_chars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9']
 
-if len(sys.argv)>1 and sys.argv[1] == "-h" or sys.argv[1] == "-help":
+if len(sys.argv)>1 and (sys.argv[1] == "-h" or sys.argv[1] == "-help"):
     print("Run this file in the command line to iterate all possible letter combinations.\nYou can specify a starting point for the file to interate from or the number of characters in each combonation.\nusasge. python3 twitch_name_combinations.py [starting word (optional)] [number (optional)]")
     exit()
 
-#can be replaced with the location of the chromedriver
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
 #repersents the name. Can choose any starting name but entering the right indexes. Can also choose length by length of array
 nameCode = [0,0,0,0,0,0]
 
+#checks for if the result icon is indicating success
+def check_username_available():
+    svg = form.find_elements_by_tag_name("svg")[0]
+    return svg.get_attribute("type") == "color-fill-success"
+
 #returns true if a there is an element with the tag_name in the given element
 def check_exists_by_tag_name(element, tag_name):
     try:
         element.find_element_by_tag_name(tag_name)
-    except NoSuchElementException:
-        return False
-    return True
-
-#returns true if a there is an element with the class_name in the given element
-def check_exists_by_class_name(element, class_name):
-    try:
-        element.find_element_by_class_name(class_name)
     except NoSuchElementException:
         return False
     return True
@@ -50,7 +46,7 @@ def checkNotFin():
         if code !=34:
             return True
     return False
- 
+
 #checks if the name is valid. Returns true if valid
 def validateName(name): 
     form.find_element_by_id("signup-username").send_keys(name)
@@ -58,9 +54,7 @@ def validateName(name):
     while(not check_exists_by_tag_name(form,'figure')):
         pass
     #checks if name is valid
-    if(check_exists_by_class_name(form,"kJKagf")):
-        return True
-    return False
+    return check_username_available()
 
 #runs through every combination of names using name code
 def combinations():
@@ -103,8 +97,9 @@ if len(sys.argv)>1:
     else:
         setCode(sys.argv[1])
 
-f = open(sys.argv[0].split("twitch_name")[0]+"results.txt","a")
+f = open("results.txt","a")
 combinations()
 driver.quit()
 f.close()
+
 

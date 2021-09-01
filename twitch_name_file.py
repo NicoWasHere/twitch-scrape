@@ -24,7 +24,7 @@ else:
 #installs the chrome driver
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
-#gets the class name of the fail icon
+#checks for if the result icon is indicating success
 def check_username_available():
     svg = form.find_elements_by_tag_name("svg")[0]
     return svg.get_attribute("type") == "color-fill-success"
@@ -67,8 +67,11 @@ def use_file(file):
 #opens twitch
 driver.get("https://www.twitch.tv/")
 #delay to let the page load
-time.sleep(3)
+while not check_exists_by_tag_name(driver,'nav'):
+    time.sleep(0.2)
 driver.find_element_by_tag_name('nav').find_elements_by_tag_name('button')[5].click()
+while not check_exists_by_tag_name(driver,'form'):
+    time.sleep(0.2)
 form = driver.find_element_by_tag_name('form')
 f = open("results.txt","a")
 
